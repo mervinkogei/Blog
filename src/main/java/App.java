@@ -10,6 +10,26 @@ public class App {
 
     public static void main(String[] args) {
 
+
+
+        get("/posts/delete", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            Post.clearAll();
+            res.redirect("/");
+            return null;
+        }, new HandlebarsTemplateEngine());
+
+
+        get("/posts/:id/delete", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            int idOfPostToDelete = Integer.parseInt(req.params("id")); //pull id - must match route segment
+            Post deletePost = Post.findById(idOfPostToDelete); //use it to find post
+            deletePost.deletePost();
+            res.redirect("/");
+        }, new HandlebarsTemplateEngine());
+
+
+
         get("/", (req,res)->{
             Map<String, Object> model = new HashMap<>();
 //            model.put("allPosts", Post.getAllPosts());
@@ -20,7 +40,8 @@ public class App {
             Map<String, Object> model = new HashMap<>();
             Post newPost = new Post();
             model.put("post", newPost);
-            return new ModelAndView(model, "success.hbs");
+            response.redirect("/");
+            return null;
         }, new HandlebarsTemplateEngine());
 
         get("/posts/:id",(request, response) -> {
