@@ -11,20 +11,21 @@ public class App {
     public static void main(String[] args) {
 
 
-//        get("/posts/:id/delete", (req, res) -> {
-//            Map<String, Object> model = new HashMap<>();
-//            int idOfPostToDelete = Integer.parseInt(req.params("id")); //pull id - must match route segment
-//            Post deletePost = Post.findById(idOfPostToDelete); //use it to find post
-////            deletePost.deletePost();
-//            res.redirect("/");
-//        }, new HandlebarsTemplateEngine());
-
-        get("/posts/delete", (req, res) -> {
+        get("/posts/:id/delete", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-            Post.clearAll();
+            int idOfPostToDelete = Integer.parseInt(req.params("id")); //pull id - must match route segment
+            Post deletePost = Post.findById(idOfPostToDelete); //use it to find post
+            Post.deletePost(deletePost.getId());
             res.redirect("/");
             return null;
         }, new HandlebarsTemplateEngine());
+
+//        get("/posts/delete", (req, res) -> {
+//            Map<String, Object> model = new HashMap<>();
+//            Post.clearAll();
+//            res.redirect("/");
+//            return null;
+//        }, new HandlebarsTemplateEngine());
 
 
         get("/", (req,res)->{
@@ -39,9 +40,7 @@ public class App {
         }, new HandlebarsTemplateEngine());
 
         post("/posts/new", (request, response) -> { //URL to make new post on POST route
-            Map<String, Object> model = new HashMap<>();
             Post newPost = new Post(request.queryParams("title"), request.queryParams("description"));
-//            model.put("post", newPost);
             response.redirect("/");
             return null;
         }, new HandlebarsTemplateEngine());
@@ -67,9 +66,10 @@ public class App {
             String newTitle = req.queryParams("title");
             String newDescription = req.queryParams("description");
             int idOfPostToEdit = Integer.parseInt(req.params("id"));
-//            Post editPost = Post.findById(idOfPostToEdit);
-//            editPost.update(newTitle,newDescription); //don’t forget me
-            return new ModelAndView(model, "success.hbs");
+            Post editPost = Post.findById(idOfPostToEdit);
+            editPost.update(idOfPostToEdit,newTitle,newDescription); //don’t forget me
+            res.redirect("/");
+            return null;
         }, new HandlebarsTemplateEngine());
 
     }
