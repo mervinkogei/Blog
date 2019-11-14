@@ -5,6 +5,7 @@ import static spark.Spark.*;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.PatternSyntaxException;
 
 public class App {
 
@@ -67,7 +68,9 @@ public class App {
             String newDescription = req.queryParams("description");
             int idOfPostToEdit = Integer.parseInt(req.params("id"));
             Post editPost = Post.findById(idOfPostToEdit);
-            editPost.update(idOfPostToEdit,newTitle,newDescription); //don’t forget me
+            editPost.setTitle(newTitle);
+            editPost.setDescription(newDescription);
+            Post.update(idOfPostToEdit,editPost); //don’t forget me
             res.redirect("/");
             return null;
         }, new HandlebarsTemplateEngine());

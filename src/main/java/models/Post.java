@@ -58,10 +58,8 @@ public class Post {
         return this.created_date;
     }
 
-    public void update(int id,String title, String description){
-        Post item = Post.findById(id);
-        item.setDescription(description);
-        item.setTitle(title);
+    public static void update(int id,Post item){
+        instances.set(id-1,item);
 
     }
 
