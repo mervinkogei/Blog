@@ -23,5 +23,11 @@ public class App {
             return new ModelAndView(model, "success.hbs");
         }, new HandlebarsTemplateEngine());
 
+        get("/posts/:id",(request, response) -> {
+            Map<String, Object> model = new HashMap<>();
+//            model.put("post", Post.findById());
+            return new ModelAndView(model, "postDetail.hbs");
+        }, new HandlebarsTemplateEngine());
+
     }
 }
