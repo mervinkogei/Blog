@@ -1,11 +1,12 @@
 {{#partial "content"}}
-    <p>Content:</p>
+    <p>Title:</p>
     <p>{{ post.title }}</p>
-    <h5>Created At:</h5>
+    <h5>Description:</h5>
     <p> {{ post.description }}</p>
-    <p> {{ post.created_at }}</p>
+    <h5>Created At:</h5>
+    <p> {{ post.created_date }}</p>
 
-    <a href="/posts/{{post.id}}/update">Edit this post</a>
+    <a href="/posts/{{post.id}}/update">Edit this post?</a>
 {{/partial}}
 
 {{> layout.hbs}}

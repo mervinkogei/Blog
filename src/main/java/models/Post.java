@@ -16,8 +16,8 @@ public class Post {
             this.title=title;
             this.description=description;
             this.created_date=LocalDateTime.now();
-            this.id=instances.size();
             instances.add(this);
+            this.id=instances.size();
         }
 
       public static ArrayList<Post> getAll(){
@@ -35,10 +35,10 @@ public class Post {
       public String getTitle(){
         return this.title;
     }
-       public String getDesc(){
+       public String getDescription(){
         return this.description;
     }
-       public LocalDateTime getDate(){
+       public LocalDateTime getCreated_date(){
         return this.created_date;
     }
 

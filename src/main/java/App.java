@@ -11,22 +11,20 @@ public class App {
     public static void main(String[] args) {
 
 
-
-//        get("/posts/delete", (req, res) -> {
-//            Map<String, Object> model = new HashMap<>();
-//            Post.clearAll();
-//            res.redirect("/");
-//            return null;
-//        }, new HandlebarsTemplateEngine());
-
-
 //        get("/posts/:id/delete", (req, res) -> {
 //            Map<String, Object> model = new HashMap<>();
 //            int idOfPostToDelete = Integer.parseInt(req.params("id")); //pull id - must match route segment
 //            Post deletePost = Post.findById(idOfPostToDelete); //use it to find post
-//            deletePost.deletePost();
+////            deletePost.deletePost();
 //            res.redirect("/");
 //        }, new HandlebarsTemplateEngine());
+
+        get("/posts/delete", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            Post.clearAll();
+            res.redirect("/");
+            return null;
+        }, new HandlebarsTemplateEngine());
 
 
         get("/", (req,res)->{
@@ -35,17 +33,24 @@ public class App {
             return new ModelAndView(model,"index.hbs");
         }, new HandlebarsTemplateEngine());
 
+        get("/posts/new", (req,res)->{
+            Map<String, Object> model = new HashMap<>();
+            return new ModelAndView(model,"newPost.hbs");
+        }, new HandlebarsTemplateEngine());
+
         post("/posts/new", (request, response) -> { //URL to make new post on POST route
             Map<String, Object> model = new HashMap<>();
             Post newPost = new Post(request.queryParams("title"), request.queryParams("description"));
-            model.put("post", newPost);
+//            model.put("post", newPost);
             response.redirect("/");
             return null;
         }, new HandlebarsTemplateEngine());
 
         get("/posts/:id",(request, response) -> {
             Map<String, Object> model = new HashMap<>();
-//            model.put("post", Post.findById());
+            int idOfPostToView = Integer.parseInt(request.params("id"));
+            Post viewPost = Post.findById(idOfPostToView);
+            model.put("post", viewPost);
             return new ModelAndView(model, "postDetail.hbs");
         }, new HandlebarsTemplateEngine());
 
