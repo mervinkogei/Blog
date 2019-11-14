@@ -1,7 +1,7 @@
 import models.Post;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
-import static spark.Spark.*
+import static spark.Spark.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,7 +12,7 @@ public class App {
 
         get("/", (req,res)->{
             Map<String, Object> model = new HashMap<>();
-            model.put("allPosts", Post.getAllPosts());
+//            model.put("allPosts", Post.getAllPosts());
             return new ModelAndView(model,"index.hbs");
         }, new HandlebarsTemplateEngine());
 
