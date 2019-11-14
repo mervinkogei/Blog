@@ -29,7 +29,7 @@ public class Post {
       public static Post findById(int id){
         return instances.get(id-1);
       }
-      public Post updateById(String description){
+      public void updateById(String description){
             this.description = description;
       }
       public int getId(){
