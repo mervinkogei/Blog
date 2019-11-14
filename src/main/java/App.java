@@ -12,33 +12,32 @@ public class App {
 
 
 
-        get("/posts/delete", (req, res) -> {
-            Map<String, Object> model = new HashMap<>();
-            Post.clearAll();
-            res.redirect("/");
-            return null;
-        }, new HandlebarsTemplateEngine());
+//        get("/posts/delete", (req, res) -> {
+//            Map<String, Object> model = new HashMap<>();
+//            Post.clearAll();
+//            res.redirect("/");
+//            return null;
+//        }, new HandlebarsTemplateEngine());
 
 
-        get("/posts/:id/delete", (req, res) -> {
-            Map<String, Object> model = new HashMap<>();
-            int idOfPostToDelete = Integer.parseInt(req.params("id")); //pull id - must match route segment
-            Post deletePost = Post.findById(idOfPostToDelete); //use it to find post
-            deletePost.deletePost();
-            res.redirect("/");
-        }, new HandlebarsTemplateEngine());
-
+//        get("/posts/:id/delete", (req, res) -> {
+//            Map<String, Object> model = new HashMap<>();
+//            int idOfPostToDelete = Integer.parseInt(req.params("id")); //pull id - must match route segment
+//            Post deletePost = Post.findById(idOfPostToDelete); //use it to find post
+//            deletePost.deletePost();
+//            res.redirect("/");
+//        }, new HandlebarsTemplateEngine());
 
 
         get("/", (req,res)->{
             Map<String, Object> model = new HashMap<>();
-//            model.put("allPosts", Post.getAllPosts());
+            model.put("allPosts", Post.getAll());
             return new ModelAndView(model,"index.hbs");
         }, new HandlebarsTemplateEngine());
 
         post("/posts/new", (request, response) -> { //URL to make new post on POST route
             Map<String, Object> model = new HashMap<>();
-            Post newPost = new Post();
+            Post newPost = new Post(request.queryParams("title"), request.queryParams("description"));
             model.put("post", newPost);
             response.redirect("/");
             return null;
