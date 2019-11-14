@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 public class Post {
 
+
     private String title;
     private String description;
     private LocalDateTime created_date;
@@ -46,4 +47,5 @@ public class Post {
     }
 
     }
+
 
