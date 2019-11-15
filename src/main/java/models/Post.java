@@ -21,7 +21,7 @@ public class Post {
             instances.add(this);
         }
 
-      public static ArrayList<Post> getAll(){
+      public static ArrayList<Post> fetchAll(){
         return  instances;
       }
       public  static  void clearAll(){
@@ -30,8 +30,12 @@ public class Post {
       public static Post findById(int id){
         return instances.get(id-1);
       }
-      public Post updateById(String description){
+      public static Post deletePost(int id){
+        return instances.remove(id-1);
+      }
+      public String updatePostById(String description){
             this.description = description;
+          return description;
       }
       public int getId(){
         return this.id;
