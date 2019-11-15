@@ -1,5 +1,7 @@
 package models;
 
+import javafx.geometry.Pos;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -17,8 +19,8 @@ public class Post {
             this.title=title;
             this.description=description;
             this.created_date=LocalDateTime.now();
-            this.id=instances.size();
             instances.add(this);
+            this.id=instances.size();
         }
 
       public static ArrayList<Post> getAll(){
@@ -27,9 +29,15 @@ public class Post {
       public  static  void clearAll(){
         instances.clear();
       }
+
       public static Post findById(int id){
         return instances.get(id-1);
       }
+
+
+      public static void deletePost(int id){
+        instances.remove(id-1);
+        
       public void updateById(String description){
             this.description = description;
       }
@@ -39,11 +47,25 @@ public class Post {
       public String getTitle(){
         return this.title;
     }
-       public String getDesc(){
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getDescription(){
         return this.description;
     }
-       public LocalDateTime getDate(){
+       public LocalDateTime getCreated_date(){
         return this.created_date;
+    }
+
+    public static void update(int id,Post item){
+        instances.set(id-1,item);
+
     }
 
     }
