@@ -23,7 +23,7 @@ public class Post {
             this.id=instances.size();
         }
 
-      public static ArrayList<Post> getAll(){
+      public static ArrayList<Post> fetchAll(){
         return  instances;
       }
       public  static  void clearAll(){

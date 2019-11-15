@@ -21,13 +21,6 @@ public class App {
             return null;
         }, new HandlebarsTemplateEngine());
 
-//        get("/posts/delete", (req, res) -> {
-//            Map<String, Object> model = new HashMap<>();
-//            Post.clearAll();
-//            res.redirect("/");
-//            return null;
-//        }, new HandlebarsTemplateEngine());
-
 
         get("/", (req,res)->{
             Map<String, Object> model = new HashMap<>();
