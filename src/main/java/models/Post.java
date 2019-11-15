@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 public class Post {
 
+
     private String title;
     private String description;
     private LocalDateTime created_date;
@@ -33,8 +34,12 @@ public class Post {
         return instances.get(id-1);
       }
 
+
       public static void deletePost(int id){
         instances.remove(id-1);
+        
+      public void updateById(String description){
+            this.description = description;
       }
       public int getId(){
         return this.id;
@@ -64,4 +69,5 @@ public class Post {
     }
 
     }
+
 
